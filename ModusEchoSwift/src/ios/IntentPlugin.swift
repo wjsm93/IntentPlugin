@@ -1,4 +1,4 @@
-@objc(ModusEchoSwift) class ModusEchoSwift : CDVPlugin {
+@objc(IntentPlugin) class IntentPlugin : CDVPlugin {
   @objc(echo:)
   func echo(command: CDVInvokedUrlCommand) {
     var pluginResult = CDVPluginResult(
