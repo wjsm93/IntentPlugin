@@ -9,6 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
+import android.content.Intent;
+import android.net.Uri;
+import android.content.pm.PackageManager;
+import java.util.List;
+import android.content.Context;
 
 public class IntentPlugin extends CordovaPlugin {
 
@@ -16,6 +21,12 @@ public class IntentPlugin extends CordovaPlugin {
     private static final String INTENT_ACTION = "cl.ionix.ewallet.APP_2_APP_ACTION";
     private static final String MARKET_URI = "market://details?id=cl.ionix.ewallet";
     private static final String ONE_PAY_SCHEME = "onepay:";
+    private Context context;
+
+
+    public IntentPlugin(Context context) {
+        this.context = context;
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
@@ -30,7 +41,7 @@ public class IntentPlugin extends CordovaPlugin {
         try{
             if(isIntentAvailable(intentOP)) {
                 Log.d("debug","***OnePay Found - Intent: "+intentOP.toUri(Intent.URI_INTENT_SCHEME));
-                startActivity(intentOP);
+                context.startActivity(intentOP);
                 PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
                 callbackContext.sendPluginResult(pluginResult);
                 return true;
@@ -40,7 +51,7 @@ public class IntentPlugin extends CordovaPlugin {
                 Intent intentStore = new Intent(Intent.ACTION_VIEW,destinoPlay);
                 if(isIntentAvailable(intentStore)){
                     Log.d("debug","***Market Found - Intent: "+intentStore.toUri(Intent.URI_INTENT_SCHEME));
-                    startActivity(intentStore);
+                    context.startActivity(intentStore);
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
                     callbackContext.sendPluginResult(pluginResult);
                     return true;
@@ -57,7 +68,7 @@ public class IntentPlugin extends CordovaPlugin {
     }
 
     public boolean isIntentAvailable(Intent intent){
-        PackageManager pm = getPackageManager();
+        PackageManager pm = context.getPackageManager();
         List activities = pm.queryIntentActivities(intent,PackageManager.MATCH_DEFAULT_ONLY);
         if(activities.size() > 1){
             return true;
