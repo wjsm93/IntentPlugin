@@ -14,6 +14,12 @@
         <param name="ios-package" value="IntentPlugin" />
       </feature>
     </config-file>
+    
+    <edit-config target="LSApplicationQueriesSchemes" file="*-Info.plist" mode="merge">
+      <array>
+        <string>onepay</string>        
+      </array>
+    </edit-config>
 
     <source-file src="src/ios/IntentPlugin.swift" />
 
