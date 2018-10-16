@@ -1,12 +1,16 @@
 @objc(IntentPlugin) class IntentPlugin : CDVPlugin {
   @objc(openApp:)
   func openApp(command: CDVInvokedUrlCommand) {
+
+    // Error de plugin
     var pluginResult = CDVPluginResult(
       status: CDVCommandStatus_ERROR
     )
 
+    // Declarar variable para primer parámetro
     let occArg = command.arguments[0] as? String ?? ""
 
+    // Si la Occ no viene vacía
     if occArg.count > 0 {
 
       let onePayScheme = "onepay://"
@@ -16,7 +20,7 @@
       
       // Validar que la url esté bien formulada
       guard let url = URL(string: onePayAppStore) else {
-        return //be safe
+        return
       }
 
       var components = URLComponents(string: onePayScheme)
@@ -39,13 +43,15 @@
           UIApplication.shared.openURL(url)
         }
       }
-        
+      
+      // Success de plugin
       pluginResult = CDVPluginResult(
         status: CDVCommandStatus_OK,
-        messageAs: msg
+        messageAs: "Ok"
       )
     }
 
+    // Enviar respuesta de plugin
     self.commandDelegate!.send(
       pluginResult,
       callbackId: command.callbackId
