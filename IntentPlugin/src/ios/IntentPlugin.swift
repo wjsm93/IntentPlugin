@@ -5,9 +5,9 @@
       status: CDVCommandStatus_ERROR
     )
 
-    let msg = command.arguments[0] as? String ?? ""
+    let occArg = command.arguments[0] as? String ?? ""
 
-    if msg.count > 0 {
+    if occArg.count > 0 {
 
       let onePayScheme = "onepay://"
       let onePayAppStore = "https://itunes.apple.com/cl/app/onepay/id1218407961?mt=8"
@@ -22,14 +22,14 @@
       var components = URLComponents(string: onePayScheme)
 
       var comQueryItems: [AnyHashable] = []
-      comQueryItems.append(URLQueryItem(name: "occ", value: "1810734958644939"))
+      comQueryItems.append(URLQueryItem(name: "occ", value: occArg))
 
       components?.queryItems = comQueryItems as? [URLQueryItem]
       
       // Si la app está instalada
       if UIApplication.shared.canOpenURL(onePayApp! as URL) {
         if let anURL = components?.url {
-            UIApplication.shared.openURL(anURL)å
+            UIApplication.shared.openURL(anURL)
         }
       } else {
         // Si la app no está instalada, abrir enlace de AppStore
