@@ -14,7 +14,7 @@
     if occArg.count > 0 {
 
       let onePayScheme = "onepay://"
-      let onePayAppStore = "https://itunes.apple.com/cl/app/onepay/id1218407961?mt=8"
+      let onePayAppStore = "https://itunes.apple.com/cl/app/onepay-transbank/id1432114499?mt=8"
       
       let onePayApp = NSURL(string: onePayScheme)
       
