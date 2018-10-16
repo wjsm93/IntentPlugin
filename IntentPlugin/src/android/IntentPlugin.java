@@ -22,7 +22,7 @@ import android.util.Log;
 public class IntentPlugin extends CordovaPlugin {
 
     private static final String DURATION_LONG = "long";
-    private static final String INTENT_ACTION = "cl.ionix.ewallet.APP_2_APP_ACTION";
+    private static final String INTENT_ACTION = "cl.transbank.onepay.APP_2_APP_ACTION";
     private static final String MARKET_URI = "market://details?id=cl.transbank.onepay";
     private static final String ONE_PAY_SCHEME = "onepay:";
 
@@ -66,7 +66,7 @@ public class IntentPlugin extends CordovaPlugin {
         try{
             Uri destino = Uri.parse(ONE_PAY_SCHEME);
             
-            Intent intentOP = new Intent(Intent.ACTION_VIEW,destino);
+            Intent intentOP = new Intent(INTENT_ACTION,destino);
             intentOP.putExtra("occ", occ);
             intentOP.putExtra("browser_fallback_url","market://details?id=cl.transbank.onepay");
             intentOP.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
