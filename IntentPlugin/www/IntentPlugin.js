@@ -1,7 +1,5 @@
 var exec = require('cordova/exec');
 
-exports.openApp = function(parametros, success, error) {
-  var objetoJSON = JSON.parse(parametros);
-  var occStr = objetoJSON.occ.toString();
-  exec(success, error, 'IntentPlugin', 'openApp', occStr);
+exports.openApp = function(arg0, success, error) {
+  exec(success, error, 'IntentPlugin', 'openApp', [arg0]);
 };
