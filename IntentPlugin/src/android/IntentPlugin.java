@@ -31,15 +31,11 @@ public class IntentPlugin extends CordovaPlugin {
     }
 
     @Override
-    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
-        Log.d("debug","***action:"+action);
+    public boolean execute(String action, String occ, final CallbackContext callbackContext) {
+        
         if("openApp".equals(action)){
             try{
-                JSONObject options = args.getJSONObject(0);
-                String occ = options.getString("occ");
-                Log.d("debug","***occ:"+occ);
                 if (intentStart(occ)){
-                    Log.d("debug","***se ejecuta intent");
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
                     callbackContext.sendPluginResult(pluginResult);
                     return true;
@@ -65,21 +61,18 @@ public class IntentPlugin extends CordovaPlugin {
     public boolean intentStart(String occ){
         try{
             Uri destino = Uri.parse(ONE_PAY_SCHEME);
-            
             Intent intentOP = new Intent(INTENT_ACTION,destino);
             intentOP.putExtra("occ", occ);
             intentOP.putExtra("browser_fallback_url","market://details?id=cl.transbank.onepay");
             intentOP.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         
             if(isIntentAvailable(intentOP)) {
-                Log.d("debug","***se encuentra primer intent");
                 this.cordova.getActivity().startActivity(intentOP);
                 return true;
             } else {
                 Uri destinoPlay = Uri.parse(MARKET_URI);
                 Intent intentStore = new Intent(Intent.ACTION_VIEW,destinoPlay);
                 if(isIntentAvailable(intentStore)){
-                    Log.d("debug","***se encuentra segundo intent");
                     this.cordova.getActivity().startActivity(intentStore);
                     return true;
                 } else {
