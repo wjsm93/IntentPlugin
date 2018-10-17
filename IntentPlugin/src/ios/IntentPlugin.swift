@@ -8,7 +8,7 @@
     )
 
     // Declarar variable para primer parámetro
-    let occArg = command.arguments[0] as? String ?? ""
+    let occArg = command.arguments as? String ?? ""
 
     // Si la Occ no viene vacía
     if occArg.count > 0 {
