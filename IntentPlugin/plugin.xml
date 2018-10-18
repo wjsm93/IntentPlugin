@@ -7,6 +7,8 @@
     <clobbers target="intentplugin" />
   </js-module>
 
+  <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
+
   <platform name="ios">
 
     <config-file target="config.xml" parent="/*">
@@ -15,11 +17,11 @@
       </feature>
     </config-file>
     
-    <edit-config target="LSApplicationQueriesSchemes" file="*-Info.plist" mode="merge">
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
       <array>
         <string>onepay</string>        
       </array>
-    </edit-config>
+    </config-file>
 
     <source-file src="src/ios/IntentPlugin.swift" />
 
