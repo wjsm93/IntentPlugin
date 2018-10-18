@@ -34,9 +34,9 @@ public class IntentPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
         
         if("openApp".equals(action)){
-            try{
-                JSONObject options = args.getJSONObject(0);
-                String occ = options.getString("occ");
+            try {
+                String occ = args.getString(0);
+
                 if (intentStart(occ)){
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
                     callbackContext.sendPluginResult(pluginResult);
