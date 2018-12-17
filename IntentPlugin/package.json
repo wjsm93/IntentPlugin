@@ -1,8 +1,8 @@
 {
-  "name": "modusechoswift",
+  "name": "intentplugin",
   "version": "1.0.0",
-  "description": "Test plugin",
-  "main": "wwww/ModusEchoSwift.js",
+  "description": "Plugin para hacer intent nativo",
+  "main": "wwww/IntentPlugin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

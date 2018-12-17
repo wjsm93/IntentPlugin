@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cl-entel-plugins-intentplugin" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <name>IntentPlugin</name>
+
+  <js-module name="IntentPlugin" src="www/IntentPlugin.js">
+    <clobbers target="intentplugin" />
+  </js-module>
+
+  <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
+
+  <platform name="ios">
+
+    <config-file target="config.xml" parent="/*">
+      <feature name="IntentPlugin">
+        <param name="ios-package" value="IntentPlugin" />
+      </feature>
+    </config-file>
+    
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>onepay</string>        
+      </array>
+    </config-file>
+
+    <source-file src="src/ios/IntentPlugin.swift" />
+
+  </platform>
+
+  <platform name="android">
+
+    <config-file target="config.xml" parent="/*">
+      <feature name="IntentPlugin">
+        <param name="android-package" value="cl.entel.plugins.intentplugin.IntentPlugin"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/IntentPlugin.java" target-dir="src/cl/entel/plugins/intentplugin" />
+
+  </platform>
+</plugin>
